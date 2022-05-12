@@ -23,3 +23,28 @@ int			ft_atoi(const char *str)
 	}
 	return ((int)(n * sign));
 }
+
+void	print(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+}
+
+void	print_action(t_attributes *attributes, int id, char *str)
+{
+	pthread_mutex_lock(&(attributes->print));
+	if (!(attributes->died))
+	{
+		print("time");
+		putnbr(id + 1);
+		print(str);
+		print("\n");
+	}
+	pthread_mutex_unlock(&(attributes->print));
+}

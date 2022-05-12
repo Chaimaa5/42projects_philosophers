@@ -40,10 +40,10 @@ int init_mutex(t_attributes *attributes)
 {
     int n;
 
-    n = attribute->nb_philo;
+    n = attributes->nb_philo;
     while (--n >= 0)
     {
-        if (pthread_mutex_init(attributes->fork[n], NULL))
+        if (pthread_mutex_init(&(attributes->fork[n]), NULL))
             return (1);
     }
     return (0);

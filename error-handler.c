@@ -12,3 +12,11 @@ void    log_err(char *error)
     }
 }
 
+void    init_handler(int res)
+{
+    if (res == 1)
+        print("at least one wrong argument");
+    else if (res == 2)
+        print("Error while initialiwing mutex");
+}
+
