@@ -20,10 +20,14 @@ typedef struct s_attributes{
     int eat_time;
     int sleep_time;
     int nb_eat;
+    pthread_mutex_t fork[250];
     t_philosopher philo;
 }   t_attributes;
 
+// initialization
 int    init(t_attributes *attributes, char **argv);
+void init_philo(t_attributes *attributes);
+
 int			ft_atoi(const char *str);
 void    log_err(char *error);
 #endif

@@ -9,7 +9,7 @@ int    init(t_attributes *attributes, char **argv)
     if (argv[5])
     {
         attributes->nb_eat = ft_atoi(argv[5]);
-        if (nb->eat <= 0)
+        if (attributes->nb_eat <= 0)
             return (1);
     }
     if (attributes->nb_philo > 250 || attributes->nb_philo < 2  || attributes->death_time < 0
@@ -22,7 +22,7 @@ int    init(t_attributes *attributes, char **argv)
 void init_philo(t_attributes *attributes)
 {
     int n;
-    t_philosopher *philo;
+    t_philosopher *philo = NULL;
 
     n = attributes->nb_philo;
     while (n)
@@ -30,7 +30,21 @@ void init_philo(t_attributes *attributes)
         philo->id = n;
         philo->left_fork = n;
         philo->right_fork = n+1;
-        philo->attributes = attributes;
+        philo->attribute = attributes;
         n--;
     }
+}
+
+
+int init_mutex(t_attributes *attributes)
+{
+    int n;
+
+    n = attribute->nb_philo;
+    while (--n >= 0)
+    {
+        if (pthread_mutex_init(attributes->fork[n], NULL))
+            return (1);
+    }
+    return (0);
 }
