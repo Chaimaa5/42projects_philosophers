@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int    init(t_attributes *attributes, char **argv)
+int    init_args(t_attributes *attributes, char **argv)
 {
     attributes->nb_philo = ft_atoi(argv[1]);
     attributes->death_time = ft_atoi(argv[2]);

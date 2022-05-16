@@ -5,6 +5,20 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <sys/time.h>
+
+#define WRONG_ARG -1
+#define MALLOC_ERR -2
+#define PTHREAD_ERR -3
+#define NUM_ARG -4
+
+typedef enum e_actions{
+    TOOK_FORK,
+    EATING,
+    SLEEPING,
+    THINKING,
+    DIED,
+}   t_actions;
 
 typedef struct s_philosopher{
     int id;
@@ -27,18 +41,21 @@ typedef struct s_attributes{
 }   t_attributes;
 
 // Initialization
-int    init(t_attributes *attributes, char **argv);
+int   init_args(t_attributes *attributes, char **argv);
 void init_philo(t_attributes *attributes);
 
 // Print
-void	print_action(t_attributes *attributes, int id, char **str);
+void	print_action(t_attributes *attributes, int id, int action);
 void	print(char *str);
 
 // Error management
-void    log_err(char *error);
-void    init_handler(int res);
+void    log_err(int err);
+void    write_err(char *err);
 
 // Utils 
 int			ft_atoi(const char *str);
+void	ft_putchar(char c);
+void	ft_putnbr(int n);
+size_t  get_time();
 
 #endif

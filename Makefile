@@ -1,4 +1,4 @@
-SRCS	= philo.c init.c utils.c error-handler.c
+SRCS	= philo.c init.c utils.c error-handler.c launcher.c
 
 
 OBJS	= $(SRCS:.c=.o)

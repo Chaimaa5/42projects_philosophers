@@ -36,15 +36,44 @@ void	print(char *str)
 	}
 }
 
-void	print_action(t_attributes *attributes, int id, char *str)
+// void	print_action(t_attributes *attributes, int id, int action)
+// {
+// 	pthread_mutex_lock(&(attributes->print));
+// 	if (!(attributes->died))
+// 	{
+// 		print("time");
+// 		ft_putnbr(id + 1);
+// 		print(str);
+// 		print("\n");
+// 	}
+// 	pthread_mutex_unlock(&(attributes->print));
+// }
+
+
+
+void	ft_putnbr(int n)
 {
-	pthread_mutex_lock(&(attributes->print));
-	if (!(attributes->died))
+	unsigned int	nb;
+
+	nb = n;
+	if (n < 0)
 	{
-		print("time");
-		putnbr(id + 1);
-		print(str);
-		print("\n");
+		nb *= -1;
+		ft_putchar('-');
 	}
-	pthread_mutex_unlock(&(attributes->print));
+	if (nb >= 10)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
+	else
+	{
+		nb += '0';
+		ft_putchar(nb);
+	}
+}
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
 }

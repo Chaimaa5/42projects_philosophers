@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void    log_err(char *error)
+void    write_err(char *error)
 {
     int i;
 
@@ -12,11 +12,15 @@ void    log_err(char *error)
     }
 }
 
-void    init_handler(int res)
+void    log_err(int err)
 {
-    if (res == 1)
-        print("at least one wrong argument");
-    else if (res == 2)
-        print("Error while initialiwing mutex");
+    if (err == WRONG_ARG)
+        print("Error: at least one wrong argument");
+    else if (err == MALLOC_ERR)
+        print("Error: malloc error");
+    else if (err == NUM_ARG)
+        print("Error: syntax error"); 
+    else if (err == PTHREAD_ERR)
+        print("Error: thread error");
 }
 

@@ -32,11 +32,11 @@
 
 int main(int argc, char **argv)
 {
-    (void) argv;
+    // (void) argv;
     t_attributes attributes;
 
     if (argc != 5 || argc != 6)
-        log_err("not the right amount of arguments\n");
-    if (init(&attributes, argv) != 1)
+        log_err(NUM_ARG);
+    if (init_args(&attributes, argv) != 1)
         printf("%d\n", attributes.nb_philo);
 }
