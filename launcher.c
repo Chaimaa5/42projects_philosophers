@@ -1,16 +1,22 @@
 #include "philo.h"
 
-void    start()
-{
-    pthread_create()
-}
-size_t  get_time()
-{
-    struct timeval tv;
 
-    gettimeofday(&tv, NULL);
-    return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-} 
+
+void    routine(void *void_philo)
+{
+    t_philosopher *philo;
+    t_attributes *attributes;
+
+    philo = (void * )void_philo;
+    attributes = philo.attributes;
+    while (!attributes->died)
+    {
+        eat(philo);
+        print_action(attributes, philo->id, SLEEPING);
+        // sleepfunction
+        print_action(attributes, philo->id, THINKING);
+    }
+}
 
 void	print_action(t_attributes *attributes, int id, int action)
 {
@@ -27,3 +33,4 @@ void	print_action(t_attributes *attributes, int id, int action)
 		printf("%d died", id);
 	pthread_mutex_unlock(&(attributes->print));
 }
+

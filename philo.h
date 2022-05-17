@@ -56,6 +56,5 @@ void    write_err(char *err);
 int			ft_atoi(const char *str);
 void	ft_putchar(char c);
 void	ft_putnbr(int n);
-size_t  get_time();
-
+long long  get_time();
 #endif

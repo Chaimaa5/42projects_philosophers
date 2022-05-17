@@ -36,6 +36,13 @@ void	print(char *str)
 	}
 }
 
+long long  get_time()
+{
+    struct timeval tv;
+
+    gettimeofday(&tv, NULL);
+    return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+} 
 // void	print_action(t_attributes *attributes, int id, int action)
 // {
 // 	pthread_mutex_lock(&(attributes->print));
