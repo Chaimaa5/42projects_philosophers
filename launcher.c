@@ -3,22 +3,29 @@
 
 void    eat(t_philosopher *philo)
 {
-    //lock forks
-    //print has taken a fork
-    lock the meal
-    print is eating
-    change last meal time
-    unlock the meal
-    sleep time to eat
-    nb_ate++;
-    unlock both forks
+    t_attributes *attributes;
+
+    attributes = philo->attributes;
+    pthread_mutex_lock(&(attributes->forks[philo->left_fork]);
+    print_action(attributes, philo->id, TOOK_FORK);
+    pthread_mutex_lock(&(attributes->fork[philo->right_fork]));
+    print_action(attributes, philo->id, TOOK_FORK);
+    pthread_mutex_lock(&(attributes->meal));
+    print_action(attributes, philo->id, EATING);
+    attributes->last_meal = get_time();
+    pthread_mutex_unlock(&(attributes->meal));
+    // sleep time to eat
+    philo->nb_ate++;
+    pthread_mutex_unlock(&(attributes->fork[philo->left_fork]));
+    pthread_mutex_unlock(&(attributes->fork[philo->left_fork]));
+
 }
 void    routine(void *void_philo)
 {
     t_philosopher *philo;
     t_attributes *attributes;
 
-    philo = (void * )void_philo;
+    philo = (t_philosopher * )void_philo;
     attributes = philo.attributes;
     while (!attributes->died)
     {

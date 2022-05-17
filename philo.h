@@ -57,4 +57,7 @@ int			ft_atoi(const char *str);
 void	ft_putchar(char c);
 void	ft_putnbr(int n);
 long long  get_time();
+void    eat(t_philosopher *philo);
+void    routine(void *void_philo);
+
 #endif
