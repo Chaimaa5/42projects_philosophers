@@ -1,7 +1,18 @@
 #include "philo.h"
 
 
-
+void    eat(t_philosopher *philo)
+{
+    //lock forks
+    //print has taken a fork
+    lock the meal
+    print is eating
+    change last meal time
+    unlock the meal
+    sleep time to eat
+    nb_ate++;
+    unlock both forks
+}
 void    routine(void *void_philo)
 {
     t_philosopher *philo;
@@ -17,6 +28,7 @@ void    routine(void *void_philo)
         print_action(attributes, philo->id, THINKING);
     }
 }
+
 
 void	print_action(t_attributes *attributes, int id, int action)
 {
