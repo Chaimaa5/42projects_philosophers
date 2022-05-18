@@ -33,9 +33,11 @@ typedef struct s_attributes{
     int death_time;
     int eat_time;
     int sleep_time;
-    int nb_eat;
+    int nb_ate;
     int died;
+    int last_meal;
     pthread_mutex_t fork[250];
+    pthread_mutex_t meal;
     pthread_mutex_t print;
     t_philosopher philo;
 }   t_attributes;

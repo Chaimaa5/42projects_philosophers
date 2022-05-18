@@ -5,8 +5,8 @@ void    eat(t_philosopher *philo)
 {
     t_attributes *attributes;
 
-    attributes = philo->attributes;
-    pthread_mutex_lock(&(attributes->forks[philo->left_fork]);
+    attributes = philo->attribute;
+    pthread_mutex_lock(&(attributes->fork[philo->left_fork]));
     print_action(attributes, philo->id, TOOK_FORK);
     pthread_mutex_lock(&(attributes->fork[philo->right_fork]));
     print_action(attributes, philo->id, TOOK_FORK);
@@ -15,7 +15,7 @@ void    eat(t_philosopher *philo)
     attributes->last_meal = get_time();
     pthread_mutex_unlock(&(attributes->meal));
     // sleep time to eat
-    philo->nb_ate++;
+    attributes->nb_ate++;
     pthread_mutex_unlock(&(attributes->fork[philo->left_fork]));
     pthread_mutex_unlock(&(attributes->fork[philo->left_fork]));
 
@@ -26,7 +26,7 @@ void    routine(void *void_philo)
     t_attributes *attributes;
 
     philo = (t_philosopher * )void_philo;
-    attributes = philo.attributes;
+    attributes = philo->attribute;
     while (!attributes->died)
     {
         eat(philo);
