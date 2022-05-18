@@ -46,5 +46,9 @@ int init_mutex(t_attributes *attributes)
         if (pthread_mutex_init(&(attributes->fork[n]), NULL))
             return (1);
     }
+    if (pthread_mutex_init(&(attributes->meal_check), NULL))
+        return (1);
+    if (pthread_mutex_init(&(attributes->writing), NULL))
+        return (1);
     return (0);
 }
