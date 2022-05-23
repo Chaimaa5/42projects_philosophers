@@ -84,3 +84,13 @@ void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
+
+void	help_sleep(size_t time, t_attributes *attributes)
+{
+	while (!attributes->died)
+	{
+		if (>= time)
+			break;
+		usleep(50);
+	}
+}

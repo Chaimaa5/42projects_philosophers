@@ -24,6 +24,7 @@ typedef struct s_philosopher{
     int id;
     int left_fork;
     int right_fork;
+    int last_meal;
     pthread_t philo;
     struct s_attributes *attribute;
 }   t_philosopher;
@@ -35,7 +36,6 @@ typedef struct s_attributes{
     int sleep_time;
     int nb_ate;
     int died;
-    int last_meal;
     pthread_mutex_t fork[250];
     pthread_mutex_t meal;
     pthread_mutex_t print;

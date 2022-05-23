@@ -16,6 +16,8 @@ int    init_args(t_attributes *attributes, char **argv)
     || attributes->eat_time < 0 || attributes->sleep_time < 0)
         return (1);
     init_philo(attributes);
+    if (init_mutex(attributes))
+        return(1);
     return (0);
 }
 
@@ -29,12 +31,12 @@ void init_philo(t_attributes *attributes)
     {
         philo->id = n;
         philo->left_fork = n;
-        philo->right_fork = n+1;
+        philo->right_fork = (n + 1) % attributes->nb_philo;
+        philo->last_meal = 0;
         philo->attribute = attributes;
         n--;
     }
 }
-
 
 int init_mutex(t_attributes *attributes)
 {
@@ -43,10 +45,10 @@ int init_mutex(t_attributes *attributes)
     n = attributes->nb_philo;
     while (--n >= 0)
     {
-        if (pthread_mutex_init(&(attributes->fork[n]), NULL))
+        if (pthread_mutex_init(&(attributes->forks[n]), NULL))
             return (1);
     }
-    if (pthread_mutex_init(&(attributes->meal_check), NULL))
+    if (pthread_mutex_init(&(attributes->meal), NULL))
         return (1);
     if (pthread_mutex_init(&(attributes->writing), NULL))
         return (1);
