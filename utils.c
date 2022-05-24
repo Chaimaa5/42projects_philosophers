@@ -85,11 +85,19 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
+long long	diff_time(long long pres, long long past)
+{
+	return (pres - past);
+}
+
 void	help_sleep(size_t time, t_attributes *attributes)
 {
+	long long	ttime;
+
+	ttime = get_time();
 	while (!attributes->died)
 	{
-		if (>= time)
+		if (diff_time(get_time(), ttime) >= time)
 			break;
 		usleep(50);
 	}
