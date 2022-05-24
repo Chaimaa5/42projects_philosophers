@@ -82,5 +82,13 @@ int starter(t_attributes *a)
             return (1);
         i++;
     }
+    i = 0;
+    while (i <= a->nb_philo)
+    {
+        if (pthread_join((p[i].philo), NULL))
+            return (1);
+        i++;
+    }
+    death_check(a, p);
     return (0);
 }
