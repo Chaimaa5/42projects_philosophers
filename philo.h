@@ -61,6 +61,7 @@ void	ft_putchar(char c);
 void	ft_putnbr(int n);
 long long  get_time();
 long long	diff_time(long long pres, long long past);
+void	help_sleep(long long time, t_attributes *attributes);
 
 void    eat(t_philosopher *philo);
 void    routine(void *void_philo);
