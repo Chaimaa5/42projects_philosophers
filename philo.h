@@ -36,7 +36,7 @@ typedef struct s_attributes{
     int sleep_time;
     int nb_ate;
     int died;
-    pthread_mutex_t fork[250];
+    pthread_mutex_t forks[250];
     pthread_mutex_t meal;
     pthread_mutex_t print;
     t_philosopher philo;
@@ -45,6 +45,7 @@ typedef struct s_attributes{
 // Initialization
 int   init_args(t_attributes *attributes, char **argv);
 void init_philo(t_attributes *attributes);
+int init_mutexes(t_attributes *attributes);
 
 // Print
 void	print_action(t_attributes *attributes, int id, int action);
@@ -59,7 +60,7 @@ int			ft_atoi(const char *str);
 void	ft_putchar(char c);
 void	ft_putnbr(int n);
 size_t  get_time();
-size_t	diff_time(size_t pres, size_t past)
+size_t	diff_time(size_t pres, size_t past);
 
 void    eat(t_philosopher *philo);
 void    routine(void *void_philo);

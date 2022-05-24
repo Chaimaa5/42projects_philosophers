@@ -16,7 +16,7 @@ int    init_args(t_attributes *attributes, char **argv)
     || attributes->eat_time < 0 || attributes->sleep_time < 0)
         return (1);
     init_philo(attributes);
-    if (init_mutex(attributes))
+    if (init_mutexes(attributes))
         return(1);
     return (0);
 }
@@ -38,7 +38,7 @@ void init_philo(t_attributes *attributes)
     }
 }
 
-int init_mutex(t_attributes *attributes)
+int init_mutexes(t_attributes *attributes)
 {
     int n;
 
@@ -50,7 +50,7 @@ int init_mutex(t_attributes *attributes)
     }
     if (pthread_mutex_init(&(attributes->meal), NULL))
         return (1);
-    if (pthread_mutex_init(&(attributes->writing), NULL))
+    if (pthread_mutex_init(&(attributes->print), NULL))
         return (1);
     return (0);
 }
