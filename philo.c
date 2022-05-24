@@ -35,10 +35,14 @@ int main(int argc, char **argv)
 {
     t_attributes attributes;
 
-    if (argc != 5 || argc != 6)
+
+    if (argc < 5 || argc > 6)
         log_err(NUM_ARG);
-    if (init_args(&attributes, argv) != 1)
+    // if ((ret = init_all(&rules, argv)))
+	// 	return (error_manager(ret));
+    if (init_args(&attributes, argv))
         printf("%d\n", attributes.nb_philo);
-    if (starter(&attributes))
-        printf("Error\n");
+    // if (starter(&attributes))
+    //     printf("Error\n");
+    return (0);
 }

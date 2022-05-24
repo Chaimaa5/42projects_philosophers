@@ -25,6 +25,7 @@ typedef struct s_philosopher{
     int left_fork;
     int right_fork;
     int last_meal;
+    int x_ate;
     pthread_t philo;
     struct s_attributes *attribute;
 }   t_philosopher;
@@ -44,7 +45,7 @@ typedef struct s_attributes{
 
 // Initialization
 int   init_args(t_attributes *attributes, char **argv);
-void init_philo(t_attributes *attributes);
+void init_philo(t_attributes *a);
 int init_mutexes(t_attributes *attributes);
 
 // Print
