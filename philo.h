@@ -48,22 +48,21 @@ void init_philo(t_attributes *attributes);
 int init_mutexes(t_attributes *attributes);
 
 // Print
-void	print_action(t_attributes *attributes, int id, int action);
 void	print(char *str);
+void	print_action(t_attributes *attributes, int id, int action);
 
 // Error management
-void    log_err(int err);
-void    write_err(char *err);
+void        log_err(int err);
+void        write_err(char *err);
 
 // Utils 
 int			ft_atoi(const char *str);
-void	ft_putchar(char c);
-void	ft_putnbr(int n);
-long long  get_time();
+void	    ft_putchar(char c);
+void	    ft_putnbr(int n);
+long long   get_time();
 long long	diff_time(long long pres, long long past);
-void	help_sleep(long long time, t_attributes *attributes);
-
-void    eat(t_philosopher *philo);
-void    routine(void *void_philo);
+void	    help_sleep(long long time, t_attributes *attributes);
+void        eat(t_philosopher *philo);
+void        routine(void *void_philo);
 
 #endif

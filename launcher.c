@@ -1,5 +1,19 @@
 #include "philo.h"
 
+void    death_check(t_attributes *a, t_philosopher *p)
+{
+    int i;
+
+    i = 0;
+    while (i < a->nb_philo && !(a->died))
+    {
+        pthread_mutex_lock(&(a->meal));
+        if (diff_time(get_time(), p[i]->last_meal) > a->death_time)
+            break;
+        pthread_mutex_unlock(&(a->meal));
+        i++;
+    }
+}
 
 void    eat(t_philosopher *philo)
 {
