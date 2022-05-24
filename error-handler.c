@@ -15,12 +15,12 @@ void    write_err(char *error)
 void    log_err(int err)
 {
     if (err == WRONG_ARG)
-        print("Error: at least one wrong argument");
+        print("Error: at least one wrong argument\n");
     else if (err == MALLOC_ERR)
-        print("Error: malloc error");
+        print("Error: malloc error\n");
     else if (err == NUM_ARG)
-        print("Error: syntax error"); 
+        print("Error: syntax error\n"); 
     else if (err == PTHREAD_ERR)
-        print("Error: thread error");
+        print("Error: thread error\n");
 }
 

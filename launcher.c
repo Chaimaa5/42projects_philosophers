@@ -57,15 +57,15 @@ void	print_action(t_attributes *attributes, int id, int action)
 {
 	pthread_mutex_lock(&(attributes->print));
 	if (action == EATING)
-		printf("%d is eating", id);
+		printf("%d is eating\n", id);
 	else if (action == SLEEPING)
-		printf("%d is sleeping", id);
+		printf("%d is sleeping\n", id);
 	else if (action == THINKING)
-		printf("%d is thinking", id);
+		printf("%d is thinking\n", id);
 	else if (action == TOOK_FORK)
-		printf("%d Has taken a fork", id);
+		printf("%d Has taken a fork\n", id);
 	else if (action == DIED)
-		printf("%d died", id);
+		printf("%d died\n", id);
 	pthread_mutex_unlock(&(attributes->print));
 }
 
