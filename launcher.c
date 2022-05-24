@@ -14,7 +14,7 @@ void    eat(t_philosopher *philo)
     print_action(attributes, philo->id, EATING);
     philo->last_meal = get_time();
     pthread_mutex_unlock(&(attributes->meal));
-    // sleep time to eat
+    help_sleep(attributes->sleep_time, attributes);
     attributes->nb_ate++;
     pthread_mutex_unlock(&(attributes->forks[philo->left_fork]));
     pthread_mutex_unlock(&(attributes->forks[philo->left_fork]));
@@ -32,7 +32,7 @@ void    routine(void *void_philo)
     {
         eat(philo);
         print_action(attributes, philo->id, SLEEPING);
-        // sleepfunction
+        help_sleep(attributes->sleep_time, attributes);
         print_action(attributes, philo->id, THINKING);
     }
 }
