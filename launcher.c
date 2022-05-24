@@ -68,3 +68,4 @@ void	print_action(t_attributes *attributes, int id, int action)
 	pthread_mutex_unlock(&(attributes->print));
 }
 
+int starter(t_attributes *)
