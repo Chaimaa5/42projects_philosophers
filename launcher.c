@@ -35,7 +35,7 @@ void    eat(t_philosopher *philo)
 
 }
 
-void    routine(void *void_philo)
+void    *routine(void *void_philo)
 {
     t_philosopher *philo;
     t_attributes *attributes;
@@ -49,6 +49,7 @@ void    routine(void *void_philo)
         help_sleep(attributes->sleep_time, attributes);
         print_action(attributes, philo->id, THINKING);
     }
+    return (NULL);
 }
 
 
@@ -68,4 +69,18 @@ void	print_action(t_attributes *attributes, int id, int action)
 	pthread_mutex_unlock(&(attributes->print));
 }
 
-int starter(t_attributes *)
+int starter(t_attributes *a)
+{
+    t_philosopher *p;
+    int            i;
+
+    i = 0;
+    p = a->philo;
+    while (i <= a->nb_philo)
+    {
+        if (pthread_create(&(p[i].philo), NULL, routine, &(p[i])))
+            return (1);
+        i++;
+    }
+    return (0);
+}

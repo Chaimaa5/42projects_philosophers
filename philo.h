@@ -39,7 +39,7 @@ typedef struct s_attributes{
     pthread_mutex_t forks[250];
     pthread_mutex_t meal;
     pthread_mutex_t print;
-    t_philosopher philo;
+    t_philosopher philo[250];
 }   t_attributes;
 
 // Initialization
@@ -63,7 +63,8 @@ long long   get_time();
 long long	diff_time(long long pres, long long past);
 void	    help_sleep(long long time, t_attributes *attributes);
 void        eat(t_philosopher *philo);
-void        routine(void *void_philo);
-void    death_check(t_attributes *a, t_philosopher *p);
+void        *routine(void *void_philo);
+void        death_check(t_attributes *a, t_philosopher *p);
+int         starter(t_attributes *a);
 
 #endif

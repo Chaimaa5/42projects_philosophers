@@ -34,11 +34,11 @@
 int main(int argc, char **argv)
 {
     t_attributes attributes;
-    t_philosopher   philo;
 
     if (argc != 5 || argc != 6)
         log_err(NUM_ARG);
     if (init_args(&attributes, argv) != 1)
         printf("%d\n", attributes.nb_philo);
-    routine()
+    if (starter(&attributes))
+        printf("Error\n");
 }
