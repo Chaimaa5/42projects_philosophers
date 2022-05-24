@@ -59,8 +59,8 @@ void    write_err(char *err);
 int			ft_atoi(const char *str);
 void	ft_putchar(char c);
 void	ft_putnbr(int n);
-size_t  get_time();
-size_t	diff_time(size_t pres, size_t past);
+long long  get_time();
+long long	diff_time(long long pres, long long past);
 
 void    eat(t_philosopher *philo);
 void    routine(void *void_philo);

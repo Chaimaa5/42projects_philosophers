@@ -12,7 +12,7 @@ void    eat(t_philosopher *philo)
     print_action(attributes, philo->id, TOOK_FORK);
     pthread_mutex_lock(&(attributes->meal));
     print_action(attributes, philo->id, EATING);
-    attributes->last_meal = get_time();
+    philo->last_meal = get_time();
     pthread_mutex_unlock(&(attributes->meal));
     // sleep time to eat
     attributes->nb_ate++;

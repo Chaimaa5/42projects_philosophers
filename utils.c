@@ -90,7 +90,7 @@ long long	diff_time(long long pres, long long past)
 	return (pres - past);
 }
 
-void	help_sleep(size_t time, t_attributes *attributes)
+void	help_sleep(long long time, t_attributes *attributes)
 {
 	long long	ttime;
 
