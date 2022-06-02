@@ -1,7 +1,6 @@
 #include "philo.h"
 
-
-int			ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	long int	n;
 	int			sign;
@@ -36,27 +35,13 @@ void	print(char *str)
 	}
 }
 
-long long  get_time()
+long long	get_time(void)
 {
-    struct timeval tv;
+	struct timeval	tv;
 
-    gettimeofday(&tv, NULL);
-    return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-} 
-// void	print_action(t_attributes *attributes, int id, int action)
-// {
-// 	pthread_mutex_lock(&(attributes->print));
-// 	if (!(attributes->died))
-// 	{
-// 		print("time");
-// 		ft_putnbr(id + 1);
-// 		print(str);
-// 		print("\n");
-// 	}
-// 	pthread_mutex_unlock(&(attributes->print));
-// }
-
-
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
 
 void	ft_putnbr(int n)
 {

@@ -1,7 +1,5 @@
 #include "philo.h"
 
-
-
 void init_philo(t_attributes *a)
 {
     int n;
