@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cel-mhan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/02 16:50:32 by cel-mhan          #+#    #+#             */
+/*   Updated: 2022/06/02 16:50:35 by cel-mhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_atoi(const char *str)
@@ -35,14 +47,6 @@ void	print(char *str)
 	}
 }
 
-long long	get_time(void)
-{
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
 void	ft_putnbr(int n)
 {
 	unsigned int	nb;
@@ -68,22 +72,4 @@ void	ft_putnbr(int n)
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
-}
-
-long long	diff_time(long long pres, long long past)
-{
-	return (pres - past);
-}
-
-void	help_sleep(long long time, t_attributes *attributes)
-{
-	long long	ttime;
-
-	ttime = get_time();
-	while (!attributes->died)
-	{
-		if (diff_time(get_time(), ttime) >= time)
-			break;
-		usleep(50);
-	}
 }

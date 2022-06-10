@@ -1,4 +1,16 @@
-SRCS	= philo.c init.c utils.c error-handler.c launcher.c 
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cel-mhan <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/06/02 16:49:32 by cel-mhan          #+#    #+#              #
+#    Updated: 2022/06/02 16:49:34 by cel-mhan         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRCS	= philo.c init.c utils.c error-handler.c launcher.c sleep.c
 
 
 OBJS	= $(SRCS:.c=.o)
