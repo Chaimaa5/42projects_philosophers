@@ -28,8 +28,6 @@ void	log_err(int err)
 {
 	if (err == WRONG_ARG)
 		print("Error: at least one wrong argument\n");
-	else if (err == MALLOC_ERR)
-		print("Error: malloc error\n");
 	else if (err == NUM_ARG)
 		print("Error: syntax error\n");
 	else if (err == PTHREAD_ERR)

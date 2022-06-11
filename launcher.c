@@ -28,7 +28,7 @@ void	eat(t_philosopher *philo)
 	philo->last_meal = get_time();
 	pthread_mutex_unlock(&(attributes->meal));
 	help_sleep(attributes->sleep_time, attributes);
-	attributes->nb_ate++;
+	attributes->philo[philo->id].x_ate++;
 	pthread_mutex_unlock(&(attributes->forks[philo->left_fork]));
 	pthread_mutex_unlock(&(attributes->forks[philo->right_fork]));
 }
@@ -55,7 +55,7 @@ void	*routine(void *void_philo)
 	return (NULL);
 }
 
-int	all_ate(t_attributes *a)
+int	all_ate(t_attributes *a, t_philosopher *p)
 {
 	int	nb;
 	int	i;
@@ -64,7 +64,7 @@ int	all_ate(t_attributes *a)
 	nb = 0;
 	while (i < a->nb_philo)
 	{
-		if (a->philo[i].last_meal == a->nb_ate)
+		if (a->philo[p->id].x_ate == a->nb_ate)
 			nb++;
 		i++;
 	}
@@ -81,7 +81,7 @@ void	death_check(t_attributes *a, t_philosopher *p)
 	while (i < a->nb_philo && !(a->died))
 	{
 		pthread_mutex_lock(&(a->meal));
-		if (diff_time(get_time(), p[i].last_meal) > a->death_time || (all_ate(a) != 0))
+		if (diff_time(get_time(), p[i].last_meal) > a->death_time || (all_ate(a, p) != 0))
 		{
 			a->died = 1;
 			print_action(a, p->id, DIED);
