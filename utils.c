@@ -45,6 +45,7 @@ void	print(char *str)
 		write(1, &str[i], 1);
 		i++;
 	}
+	exit(0);
 }
 
 void	ft_putnbr(int n)

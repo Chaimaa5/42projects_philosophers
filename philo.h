@@ -36,7 +36,7 @@ typedef struct s_philosopher{
 	int					id;
 	int					left_fork;
 	int					right_fork;
-	int					last_meal;
+	long long			last_meal;
 	int					x_ate;
 	pthread_t			philo;
 	struct s_attributes	*attribute;

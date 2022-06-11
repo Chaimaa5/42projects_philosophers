@@ -48,11 +48,29 @@ void	*routine(void *void_philo)
 		print_action(attributes, philo->id, THINKING);
 		if (attributes->died == 1)
 		{
-			printf("died");
+			print_action(attributes, philo->id, DIED);
 			exit(1);
 		}
 	}
 	return (NULL);
+}
+
+int	all_ate(t_attributes *a)
+{
+	int	nb;
+	int	i;
+
+	i = 0;
+	nb = 0;
+	while (i < a->nb_philo)
+	{
+		if (a->philo[i].last_meal == a->nb_ate)
+			nb++;
+		i++;
+	}
+	if (nb == a->nb_philo)
+		return (1);
+	return (0);
 }
 
 void	death_check(t_attributes *a, t_philosopher *p)
@@ -63,7 +81,7 @@ void	death_check(t_attributes *a, t_philosopher *p)
 	while (i < a->nb_philo && !(a->died))
 	{
 		pthread_mutex_lock(&(a->meal));
-		if (diff_time(get_time(), p[i].last_meal) > a->death_time)
+		if (diff_time(get_time(), p[i].last_meal) > a->death_time || (all_ate(a) != 0))
 		{
 			a->died = 1;
 			print_action(a, p->id, DIED);
