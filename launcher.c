@@ -96,6 +96,7 @@ int	starter(t_attributes *a)
 
 	i = 0;
 	p = a->philo;
+	a->time_of_start = get_time();
 	while (i <= a->nb_philo)
 	{
 		if (pthread_create(&(p[i].philo), NULL, routine, &(p[i])))

@@ -53,7 +53,6 @@ int	init_args(t_attributes *attributes, char **argv)
 	attributes->eat_time = ft_atoi(argv[3]);
 	attributes->sleep_time = ft_atoi(argv[4]);
 	attributes->died = 0;
-	attributes->time_of_start = get_time();
 	if (argv[5])
 	{
 		attributes->nb_ate = ft_atoi(argv[5]);

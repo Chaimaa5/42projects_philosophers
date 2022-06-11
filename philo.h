@@ -49,7 +49,7 @@ typedef struct s_attributes{
 	int				sleep_time;
 	int				nb_ate;
 	int				died;
-	int				time_of_start;
+	long long		time_of_start;
 	pthread_mutex_t	forks[250];
 	pthread_mutex_t	meal;
 	pthread_mutex_t	print;
