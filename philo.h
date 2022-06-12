@@ -48,6 +48,7 @@ typedef struct s_attributes{
 	int				eat_time;
 	int				sleep_time;
 	int				nb_ate;
+	int				all_ate;
 	int				died;
 	long long		time_of_start;
 	pthread_mutex_t	forks[250];

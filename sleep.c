@@ -22,7 +22,7 @@ void	help_sleep(long long time, t_attributes *attributes)
 	long long	ttime;
 
 	ttime = get_time();
-	while (!attributes->died)
+	while (!(attributes->died))
 	{
 		if (diff_time(get_time(), ttime) >= time)
 			break ;

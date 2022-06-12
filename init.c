@@ -53,12 +53,15 @@ int	init_args(t_attributes *attributes, char **argv)
 	attributes->eat_time = ft_atoi(argv[3]);
 	attributes->sleep_time = ft_atoi(argv[4]);
 	attributes->died = 0;
+	attributes->all_ate = 0;
 	if (argv[5])
 	{
 		attributes->nb_ate = ft_atoi(argv[5]);
 		if (attributes->nb_ate <= 0)
 			return (-1);
 	}
+	else
+		attributes->nb_ate = -1;
 	if (attributes->nb_philo > 250 || attributes->nb_philo < 2
 		|| attributes->death_time < 0 || attributes->eat_time < 0
 		|| attributes->sleep_time < 0)
