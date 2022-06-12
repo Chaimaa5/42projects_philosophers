@@ -45,7 +45,7 @@ void	*routine(void *void_philo)
 	while (!(attributes->died))
 	{
 		eat(philo);
-		if (attributes->all_ate)
+		if (attributes->all_ate == 1)
 			break;
 		print_action(attributes, philo->id, SLEEPING);
 		help_sleep(attributes->sleep_time, attributes);
@@ -54,36 +54,29 @@ void	*routine(void *void_philo)
 	return (NULL);
 }
 
-// int	all_ate(t_attributes *a, t_philosopher *p)
-// {
-// 	int	nb;
-// 	int	i;
+void	all_ate(t_attributes *a, t_philosopher *p)
+{
+	int	i;
 
-// 	i = 0;
-// 	nb = 0;
-// 	while (i < a->nb_philo)
-// 	{
-// 		if (a->philo[p->id].x_ate == a->nb_ate)
-// 			nb++;
-// 		i++;
-// 	}
-// 	if (nb == a->nb_philo)
-// 		return (1);
-// 	return (0);
-// }
+	i = 0;
+	while (a->nb_ate != -1 &&  p[i].x_ate <= a->nb_ate)
+		i++;
+	if (i == (a->nb_philo * a->nb_ate))
+		a->all_ate = 1;
+}
 
 void	exit_threads(t_attributes *a, t_philosopher *p)
 {
 	int	i;
 
-	i = 0;
-	while (i < a->nb_philo)
+	i = 1;
+	while (i <= a->nb_philo)
 	{
 		pthread_join((p[i].philo), NULL);
 		i++;
 	}
-	i = 0;
-	while (i < a->nb_philo)
+	i = 1;
+	while (i <= a->nb_philo)
 	{
 		pthread_mutex_destroy((&a->forks[i]));
 		i++;
@@ -97,41 +90,41 @@ void	death_check(t_attributes *a, t_philosopher *p)
 
 	while (!(a->all_ate))
 	{
-		i = -1;
-		while (i++ < a->nb_philo && !(a->died))
+		i = 1;
+		while (i <= a->nb_philo && !(a->died))
 		{
 			pthread_mutex_lock(&(a->meal));
-			if (diff_time(get_time(), p[i].last_meal) > a->death_time)
+			if (diff_time(get_time(), p[i].last_meal) - a->time_of_start >= a->death_time)
 			{
-				print_action(a, i, DIED);
+				print_action(a, i + 1, DIED);
 				a->died = 1;
 			}
 			pthread_mutex_unlock(&(a->meal));
-			usleep(100);
-		}
-		if (a->died)
-			break;
-		i = 0;
-		while (a->nb_ate != -1 && i < a->nb_philo && p[i].x_ate >= a->nb_ate)
 			i++;
-		if (i == a->nb_philo)
-			a->all_ate = 1;
+		}
+		usleep(1000);
+		all_ate(a, p);
+		if (a->died == 1)
+			break;
 	}
 }
 
 void	print_action(t_attributes *attributes, int id, int action)
 {
 	pthread_mutex_lock(&(attributes->print));
-	if (action == EATING)
-		printf("%lld %d is eating\n", diff_time(get_time(), attributes->time_of_start), id);
-	else if (action == SLEEPING)
-		printf("%lld %d is sleeping\n", diff_time(get_time(), attributes->time_of_start),  id);
-	else if (action == THINKING)
-		printf("%lld %d is thinking\n", diff_time(get_time(), attributes->time_of_start), id);
-	else if (action == TOOK_FORK)
-		printf("%lld %d Has taken a fork\n", diff_time(get_time(), attributes->time_of_start), id);
-	else if (action == DIED)
-		printf("%lld %d died\n", diff_time(get_time(), attributes->time_of_start), id);
+	if (!(attributes->died))
+	{
+		if (action == EATING)
+			printf("%lld %d is eating\n", diff_time(get_time(), attributes->time_of_start), id);
+		else if (action == SLEEPING)
+			printf("%lld %d is sleeping\n", diff_time(get_time(), attributes->time_of_start),  id);
+		else if (action == THINKING)
+			printf("%lld %d is thinking\n", diff_time(get_time(), attributes->time_of_start), id);
+		else if (action == TOOK_FORK)
+			printf("%lld %d Has taken a fork\n", diff_time(get_time(), attributes->time_of_start), id);
+		else if (action == DIED)
+			printf("%lld %d died\n", diff_time(get_time(), attributes->time_of_start), id);
+	}
 	pthread_mutex_unlock(&(attributes->print));
 }
 
@@ -140,14 +133,13 @@ int	starter(t_attributes *a)
 	t_philosopher	*p;
 	int				i;
 
-	i = 0;
+	i = 1;
 	p = a->philo;
 	a->time_of_start = get_time();
-	while (i < a->nb_philo)
+	while (i <= a->nb_philo)
 	{
 		if (pthread_create(&(p[i].philo), NULL, routine, &(p[i])))
 			return (1);
-		p[i].last_meal = get_time();
 		i++;
 	}
 	death_check(a, a->philo);
