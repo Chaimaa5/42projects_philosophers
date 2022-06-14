@@ -12,8 +12,6 @@
 
 #include "philo.h"
 
-
-
 void	eat(t_philosopher *philo)
 {
 	t_attributes	*attributes;
@@ -40,8 +38,6 @@ void	*routine(void *void_philo)
 
 	philo = (t_philosopher *)void_philo;
 	attributes = philo->attribute;
-	if (philo->id % 2)
-		usleep(15000);
 	while (!(attributes->died))
 	{
 		eat(philo);
@@ -69,18 +65,12 @@ void	exit_threads(t_attributes *a, t_philosopher *p)
 {
 	int	i;
 
-	i = 1;
-	while (i <= a->nb_philo)
-	{
+	i = -1;
+	while (++i < a->nb_philo)
 		pthread_join((p[i].philo), NULL);
-		i++;
-	}
-	i = 1;
-	while (i <= a->nb_philo)
-	{
+	i = -1;
+	while (++i < a->nb_philo)
 		pthread_mutex_destroy((&a->forks[i]));
-		i++;
-	}
 	pthread_mutex_destroy(&(a->print));
 }
 
@@ -90,17 +80,18 @@ void	death_check(t_attributes *a, t_philosopher *p)
 
 	while (!(a->all_ate))
 	{
-		i = 1;
-		while (i <= a->nb_philo && !(a->died))
+		i = -1;
+		while (++i < a->nb_philo && !(a->died))
 		{
 			pthread_mutex_lock(&(a->meal));
-			if (diff_time(get_time(), p[i].last_meal) - a->time_of_start >= a->death_time)
+			printf(" id %d last meal %lld current time %lld diff %lld\n", p[i].id, p[i].last_meal, get_time() , get_time() - p[i].last_meal );
+			// printf(" first diff current and last meal %lld\n", diff_time(get_time(), p[i].last_meal));
+			if ( diff_time(get_time(), p[i].last_meal) >= a->death_time)
 			{
-				print_action(a, i + 1, DIED);
+				print_action(a, i , DIED);
 				a->died = 1;
 			}
 			pthread_mutex_unlock(&(a->meal));
-			i++;
 		}
 		usleep(1000);
 		all_ate(a, p);
@@ -133,14 +124,14 @@ int	starter(t_attributes *a)
 	t_philosopher	*p;
 	int				i;
 
-	i = 1;
+	i = -1;
 	p = a->philo;
 	a->time_of_start = get_time();
-	while (i <= a->nb_philo)
+	while (++i < a->nb_philo)
 	{
 		if (pthread_create(&(p[i].philo), NULL, routine, &(p[i])))
 			return (1);
-		i++;
+		usleep(100);
 	}
 	death_check(a, a->philo);
 	exit_threads(a, p);

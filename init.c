@@ -16,16 +16,15 @@ void	init_philo(t_attributes *a)
 {
 	int	n;
 
-	n = a->nb_philo;
-	while (n)
+	n = -1;
+	while (++n < a->nb_philo)
 	{
-		a->philo[n].id = n;
+		a->philo[n].id = n+1;
 		a->philo[n].left_fork = n;
 		a->philo[n].right_fork = (n + 1) % a->nb_philo;
 		a->philo[n].last_meal = 0;
 		a->philo[n].x_ate = 0;
 		a->philo[n].attribute = a;
-		n--;
 	}
 }
 
@@ -33,8 +32,8 @@ int	init_mutexes(t_attributes *attributes)
 {
 	int	n;
 
-	n = attributes->nb_philo;
-	while (--n >= 0)
+	n = -1;
+	while (n++ < attributes->nb_philo)
 	{
 		if (pthread_mutex_init(&(attributes->forks[n]), NULL))
 			return (1);
