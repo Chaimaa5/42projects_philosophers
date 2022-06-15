@@ -61,7 +61,7 @@ int	init_args(t_attributes *attributes, char **argv)
 	}
 	else
 		attributes->nb_ate = -1;
-	if (attributes->nb_philo > 250 || attributes->nb_philo < 2
+	if (attributes->nb_philo > 250 || attributes->nb_philo < 1
 		|| attributes->death_time < 0 || attributes->eat_time < 0
 		|| attributes->sleep_time < 0)
 		return (-1);
