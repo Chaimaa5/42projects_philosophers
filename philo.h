@@ -74,5 +74,6 @@ void		eat(t_philosopher *philo);
 void		*routine(void *void_philo);
 void		death_check(t_attributes *a, t_philosopher *p);
 int			starter(t_attributes *a);
+void		all_ate(t_attributes *a, t_philosopher *p);
 
 #endif

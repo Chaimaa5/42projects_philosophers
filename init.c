@@ -19,7 +19,7 @@ void	init_philo(t_attributes *a)
 	n = -1;
 	while (++n < a->nb_philo)
 	{
-		a->philo[n].id = n+1;
+		a->philo[n].id = n + 1;
 		a->philo[n].left_fork = n;
 		a->philo[n].right_fork = (n + 1) % a->nb_philo;
 		a->philo[n].last_meal = 0;

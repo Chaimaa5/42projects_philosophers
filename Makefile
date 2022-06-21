@@ -10,38 +10,35 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= philo.c init.c utils.c error-handler.c launcher.c sleep.c
-
+SRCS	= philo.c init.c utils.c error-handler.c launcher.c sleep.c eat.c
 
 OBJS	= $(SRCS:.c=.o)
 
 NAME	= philo
 
-CLANG	= clang
+CC	= cc
 
-FLAGS	= -Wall -Wextra -Werror
+FLAGS	= -Wall -Wextra -Werror 
 
-INCLUDE	= -lpthread
+INCLUDE	= -lpthread 
 
 HEADER	= philo.h
 
 
-
-
 all:	$(NAME)
 
-.PHONY:	clean fclean re bonus bench bclean
+.PHONY:	clean fclean re 
 
 $(NAME): $(OBJS)
-	$(CLANG) $(INCLUDE) $(FLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(INCLUDE) $(FLAGS) -o $(NAME) $(OBJS)
 
 clean:
-	rm -f $(OBJS) $(B_OBJS)
+	rm -f $(OBJS) 
 
 fclean: clean
-	rm -f $(NAME) $(BONUS)
+	rm -f $(NAME) 
 
 re: fclean all
 
 %.o: %.c $(HEADER)
-	$(CLANG) $(FLAGS) -c $<  -o $(<:.c=.o)
+	$(CC) $(FLAGS) -c $<  -o $(<:.c=.o)
